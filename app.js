@@ -6,6 +6,10 @@ app.use(express.urlencoded({extended : true}));
 app.use(express.json())
 app.use(express.static(path.join(__dirname,'public')))
 
+var port = process.env.PORT || 8080;
+
+app.set('view engine', 'ejs');
+
 const {Sequelize}=require('sequelize')
 
 let sequelize=new Sequelize('postgres://postgres:bhagesh@localhost:5432/users')
@@ -34,7 +38,7 @@ app.post('/',(req,res)=>{
 })
 
 
-User.sync().then(()=>{app.listen(3000,(req,res)=>{
-    console.log("Server running at http://localhost:3000")
+User.sync().then(()=>{app.listen(port,(req,res)=>{
+    console.log("Server running at http://localhost:"+port)
 }
 )});
