@@ -1,10 +1,12 @@
 const express=require('express');
+var serveStatic = require('serve-static')
 const app=express();
 const path=require('path')
 
 app.use(express.urlencoded({extended : true}));
 app.use(express.json())
 app.use(express.static(path.join(__dirname,'public')))
+app.use(serveStatic(path.join(__dirname, 'dist')))
 
 var port = process.env.PORT || 8080;
 
