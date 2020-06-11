@@ -14,7 +14,14 @@ app.set('view engine', 'ejs');
 
 const {Sequelize}=require('sequelize')
 
-let sequelize=new Sequelize('postgres://postgres:bhagesh@localhost:5432/users')
+sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    dialectOptions: {
+        ssl: true
+    }
+});
+
 
 const User=sequelize.define('user',{
     data : {
